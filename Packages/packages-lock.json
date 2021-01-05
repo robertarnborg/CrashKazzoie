@@ -44,6 +44,15 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.polybrush": {
+      "version": "1.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.probuilder": {
       "version": "4.4.0",
       "depth": 0,
@@ -84,13 +93,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.high-definition-config": {
-      "version": "8.2.0",
-      "depth": 1,
-      "source": "registry",
+      "version": "file:../LocalPackages/com.unity.render-pipelines.high-definition-config",
+      "depth": 0,
+      "source": "local",
       "dependencies": {
         "com.unity.render-pipelines.core": "8.2.0"
-      },
-      "url": "https://packages.unity.com"
+      }
     },
     "com.unity.searcher": {
       "version": "4.0.9",
