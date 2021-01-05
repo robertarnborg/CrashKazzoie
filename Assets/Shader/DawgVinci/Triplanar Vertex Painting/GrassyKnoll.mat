@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 6-Channel Template
+  m_Name: GrassyKnoll
   m_Shader: {fileID: 4800000, guid: 4120435af0d2b19479e40ddcc71d9e4e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
