@@ -6,18 +6,15 @@ public class SaveManager : MonoBehaviour
     private static SaveManager _instance;
     public static SaveManager Instance { get { return _instance; } }
 
-    public GameObject player;
-
     #region Save Data
 
     public bool isPersistentDontDestroyOnLoad = true;
 
-    [SerializeField]
-    private Vector3 _currentCheckpointPosition;
+    public Vector3 currentCheckpointPosition;
 
-    private Scene _currentLevel;
+    public Scene currentLevel;
     #endregion
-    private void Awake()
+    public void Awake()
     {
         if (isPersistentDontDestroyOnLoad)
         {
@@ -32,12 +29,9 @@ public class SaveManager : MonoBehaviour
         {
             _instance = this;
         }
-
-        player = GameObject.FindWithTag("Player"); // Whatever player reference we need
-
     }
 
-    private void Update()
+    public void Update()
     {
         // DEBUG
         if (Input.GetKeyDown(KeyCode.R))
@@ -46,22 +40,9 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        LoadCurrentCheckpoint();
-    }
-
     public void SaveCurrentCheckpoint(Vector3 checkpointPosition)
     {
-        _currentCheckpointPosition = checkpointPosition;
-    }
-
-    public void LoadCurrentCheckpoint()
-    {
-        if(player != null)
-        {
-            player.transform.position = _currentCheckpointPosition;
-        }
+        currentCheckpointPosition = checkpointPosition;
     }
 
 }

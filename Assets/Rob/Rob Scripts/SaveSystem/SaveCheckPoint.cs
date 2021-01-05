@@ -3,12 +3,7 @@ using UnityEngine;
 
 public class SaveCheckPoint : MonoBehaviour
 {
-    [SerializeField]
-    public string thisCheckPoint;
-
-    [NonSerialized]
     private Vector3 _checkpointPosition;
-
 
     private void Awake()
     {
@@ -17,13 +12,11 @@ public class SaveCheckPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // TO DO Add Tag or Id for Player Detection
-        SaveCurrentCheckpoint();
-    }
-
-    private void SaveCurrentCheckpoint()
-    {
-        SaveManager.Instance.SaveCurrentCheckpoint(_checkpointPosition);
-        Debug.Log("This Save Point = " + thisCheckPoint + " is Saved!");
+        if(other.gameObject.GetComponent<PlayerCheckpointDetection>() != null)
+        {
+            var playerCheckPointDetection = other.gameObject.GetComponent<PlayerCheckpointDetection>();
+            playerCheckPointDetection.SaveCurrentCheckpoint(_checkpointPosition);
+            Debug.Log("This Save Point is Saved!");
+        }
     }
 }
