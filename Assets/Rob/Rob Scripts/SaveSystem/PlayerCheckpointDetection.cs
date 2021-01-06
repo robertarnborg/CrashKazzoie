@@ -21,11 +21,14 @@ public class PlayerCheckpointDetection : MonoBehaviour
 
     public void LoadCurrentCheckpoint()
     {
-        if (SaveManager.Instance.currentCheckpointPosition != null)
+        if (SaveManager.Instance != null)
         {
-            _transform.position = SaveManager.Instance.currentCheckpointPosition;
-            isLoading = true;
-            StartCoroutine("IsLoadingTimeOut", 1.0f);
+            if (SaveManager.Instance.currentCheckpointPosition != null)
+            {
+                _transform.position = SaveManager.Instance.currentCheckpointPosition;
+                isLoading = true;
+                StartCoroutine("IsLoadingTimeOut", 1.0f);
+            }
         }
     }
 
