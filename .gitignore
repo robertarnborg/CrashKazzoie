@@ -62,4 +62,5 @@ ProjectSettings/PackageManagerSettings.asset
 Packages/packages-lock.json
 Packages/manifest.json
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
-UserSettings/EditorUserSettings.asset
+ProjectSettings/Packages/com.unity.polybrush/Settings.json
+ProjectSettings/HDRPProjectSettings.asset
