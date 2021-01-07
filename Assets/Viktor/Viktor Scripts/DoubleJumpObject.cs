@@ -5,17 +5,31 @@ using UnityEngine;
 public class DoubleJumpObject : MonoBehaviour
 {
     [SerializeField] private DoubleJumpController controller = null;
+    public GameObject pickupFX;
+    public Material defaultMaterial;
+    public Material onActivateTokenMaterial;
+    private MeshRenderer _meshRenderer;
+    private SphereCollider _sphereCollider;
+
+
+    private void Awake()
+    {
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _sphereCollider = GetComponent<SphereCollider>();
+    }
 
     public void ResetToken()
     {
-        GetComponent<SphereCollider>().enabled = true;
-        GetComponent<MeshRenderer>().enabled = true;
+        _sphereCollider.enabled = true;
+        _meshRenderer.material = defaultMaterial;
     }
 
-    public void RemoveToken()
+    public void ActivateToken()
     {
-        GetComponent<SphereCollider>().enabled = false;
-        GetComponent<MeshRenderer>().enabled = false;
+        Instantiate(pickupFX, transform.position, transform.rotation);
+
+        _sphereCollider.enabled = false;
+        _meshRenderer.material = onActivateTokenMaterial;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +38,7 @@ public class DoubleJumpObject : MonoBehaviour
         {
             other.GetComponent<PlayerMovement>().GrantDoubleJump();
             controller.AddObject(transform.gameObject);
-            RemoveToken();
+            ActivateToken();
         }
     }
 

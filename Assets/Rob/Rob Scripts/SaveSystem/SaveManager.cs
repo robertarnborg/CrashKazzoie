@@ -6,9 +6,11 @@ public class SaveManager : MonoBehaviour
     private static SaveManager _instance;
     public static SaveManager Instance { get { return _instance; } }
 
+    public bool isPersistentDontDestroyOnLoad = true;
+    public bool isLevelStart = true;
+
     #region Save Data
 
-    public bool isPersistentDontDestroyOnLoad = true;
 
     public Vector3 currentCheckpointPosition;
 
@@ -25,7 +27,7 @@ public class SaveManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else
+        else // When First Instantiating
         {
             _instance = this;
         }
@@ -36,7 +38,7 @@ public class SaveManager : MonoBehaviour
         // DEBUG
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            LoadCurrentCheckPoint();
         }
     }
 
@@ -45,4 +47,16 @@ public class SaveManager : MonoBehaviour
         currentCheckpointPosition = checkpointPosition;
     }
 
+
+    public void LoadCurrentCheckPoint()
+    {
+        isLevelStart = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+
+    public void ResetCheckPoint()
+    {
+        currentCheckpointPosition = new Vector3();
+    }
 }

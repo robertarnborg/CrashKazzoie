@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class UnityEventOnTriggerEnter : MonoBehaviour
@@ -12,20 +13,71 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
     public int amountOfTimesToTrigger;
     public int currentAmountOfTimesTriggered;
 
+    public bool hasDelayUntilEvent;
+    public float eventDelay = 5.0f;
+
+    #region Text Message Fields
+    public bool hasPlayerMessageOnTrigger;
+    [Tooltip("Text without Dialogue Panel")]
+    public bool isTextOnly;
+    [TextArea]
+    public string playerMessageOnTrigger;
+    public bool fadeMessageOnTriggerExit = false;
+    public bool hasMessageTimeout;
+    [Tooltip("Fade message Timer for Both fadeMessageOnTriggerExit and hasMessageTimeout")]
+    public float messageTimeout = 5f;
+    public TextAnchor textAnchor = TextAnchor.UpperLeft;
+    #endregion
+
+
     public bool isTriggered;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isOneShot && !isTriggered)
+        if (other.tag == "Player")
         {
-            eventToTrigger.Invoke();
+            ActivateTrigger();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (fadeMessageOnTriggerExit)
+            {
+                if (isTextOnly)
+                {
+                    TextMessagePanel.Instance.StartMessageOnlyTextTimeout(messageTimeout);
+                }
+                else
+                {
+                    TextMessagePanel.Instance.StartMessageTimeout(messageTimeout);
+                }
+            }
+        }
+    }
+
+    public void ActivateTrigger()
+    {
+        if (isOneShot && !isTriggered) // Is OneShotEvent
+        {
+            if (hasPlayerMessageOnTrigger)
+            {
+                ActivateMessage();
+            }
+            ActivateEvent();
             isTriggered = true;
         }
-        else if (isAmountOfTimesTriggered)
+        else if (isAmountOfTimesTriggered) // Is X Amount of Times Can Be Triggered Event
         {
             if (currentAmountOfTimesTriggered <= amountOfTimesToTrigger)
             {
-                eventToTrigger.Invoke();
+                if (hasPlayerMessageOnTrigger)
+                {
+                    ActivateMessage();
+                }
+                ActivateEvent();
                 currentAmountOfTimesTriggered++;
             }
             else
@@ -33,12 +85,69 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
                 isTriggered = true;
             }
         }
-        else
+        else // Is Unlimited Amount Of Events
         {
             if (!isOneShot)
             {
-                eventToTrigger.Invoke();
+                if (hasPlayerMessageOnTrigger)
+                {
+                    ActivateMessage();
+                }
+                ActivateEvent();
             }
         }
+    }
+
+
+    public void ActivateMessage()
+    {
+        if (isTextOnly)
+        {
+            TextMessagePanel.Instance.ShowSetOnlyMessageNoBackgroundText(true, true, playerMessageOnTrigger,textAnchor);
+            if (hasMessageTimeout)
+            {
+                TextMessagePanel.Instance.StartMessageOnlyTextTimeout(messageTimeout);
+            }
+        }
+        else
+        {
+            TextMessagePanel.Instance.ShowSetMessageText(true, true, playerMessageOnTrigger);
+            if (hasMessageTimeout)
+            {
+                TextMessagePanel.Instance.StartMessageTimeout(messageTimeout);
+            }
+        }
+
+    }
+
+
+    public void ActivateEvent()
+    {
+        if (hasDelayUntilEvent)
+        {
+            StartCoroutine("InvokeEventOnDelay", eventDelay);
+        }
+        else
+        {
+            eventToTrigger.Invoke();
+        }
+    }
+
+
+    public IEnumerator InvokeEventOnDelay(float eventDelay)
+    {
+        float normalizedTime = 0;
+        while (normalizedTime <= 1f) // In a while loop while counting down
+        {
+            normalizedTime += Time.deltaTime / eventDelay;
+            yield return null;
+        }
+        eventToTrigger.Invoke();
+    }
+
+
+    public void InvokeTheEvent()
+    {
+        eventToTrigger.Invoke();
     }
 }
