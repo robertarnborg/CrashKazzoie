@@ -18,6 +18,8 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
 
     #region Text Message Fields
     public bool hasPlayerMessageOnTrigger;
+    [Tooltip("Text without Dialogue Panel")]
+    public bool isTextOnly;
     [TextArea]
     public string playerMessageOnTrigger;
     public bool fadeMessageOnTriggerExit = false;
@@ -42,43 +44,40 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-                if (fadeMessageOnTriggerExit)
+            if (fadeMessageOnTriggerExit)
             {
-                TextMessagePanel.Instance.StartMessageTimeout(messageTimeout);
+                if (isTextOnly)
+                {
+                    TextMessagePanel.Instance.StartMessageOnlyTextTimeout(messageTimeout);
+                }
+                else
+                {
+                    TextMessagePanel.Instance.StartMessageTimeout(messageTimeout);
+                }
             }
         }
     }
 
     public void ActivateTrigger()
     {
-        if (isOneShot && !isTriggered)
+        if (isOneShot && !isTriggered) // Is OneShotEvent
         {
             if (hasPlayerMessageOnTrigger)
             {
                 ActivateMessage();
             }
-            if (hasDelayUntilEvent)
-            {
-                StartCoroutine("InvokeEventOnDelay", eventDelay);
-            }
-            else
-            {
-                eventToTrigger.Invoke();
-            }
+            ActivateEvent();
             isTriggered = true;
         }
-        else if (isAmountOfTimesTriggered)
+        else if (isAmountOfTimesTriggered) // Is X Amount of Times Can Be Triggered Event
         {
             if (currentAmountOfTimesTriggered <= amountOfTimesToTrigger)
             {
-                if (hasDelayUntilEvent)
+                if (hasPlayerMessageOnTrigger)
                 {
-                    StartCoroutine("InvokeEventOnDelay", eventDelay);
+                    ActivateMessage();
                 }
-                else
-                {
-                    eventToTrigger.Invoke();
-                }
+                ActivateEvent();
                 currentAmountOfTimesTriggered++;
             }
             else
@@ -86,7 +85,7 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
                 isTriggered = true;
             }
         }
-        else
+        else // Is Unlimited Amount Of Events
         {
             if (!isOneShot)
             {
@@ -94,26 +93,46 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
                 {
                     ActivateMessage();
                 }
-                if (hasDelayUntilEvent)
-                {
-                    StartCoroutine("InvokeEventOnDelay", eventDelay);
-                }
-                else
-                {
-                    eventToTrigger.Invoke();
-                }
+                ActivateEvent();
             }
         }
     }
 
+
     public void ActivateMessage()
     {
-        TextMessagePanel.Instance.ShowSetMessageText(true, true, playerMessageOnTrigger);
-        if (hasMessageTimeout)
+        if (isTextOnly)
         {
-            TextMessagePanel.Instance.StartMessageTimeout(messageTimeout);
+            TextMessagePanel.Instance.ShowSetOnlyMessageNoBackgroundText(true, true, playerMessageOnTrigger,textAnchor);
+            if (hasMessageTimeout)
+            {
+                TextMessagePanel.Instance.StartMessageOnlyTextTimeout(messageTimeout);
+            }
+        }
+        else
+        {
+            TextMessagePanel.Instance.ShowSetMessageText(true, true, playerMessageOnTrigger);
+            if (hasMessageTimeout)
+            {
+                TextMessagePanel.Instance.StartMessageTimeout(messageTimeout);
+            }
+        }
+
+    }
+
+
+    public void ActivateEvent()
+    {
+        if (hasDelayUntilEvent)
+        {
+            StartCoroutine("InvokeEventOnDelay", eventDelay);
+        }
+        else
+        {
+            eventToTrigger.Invoke();
         }
     }
+
 
     public IEnumerator InvokeEventOnDelay(float eventDelay)
     {

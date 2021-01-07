@@ -104,7 +104,7 @@ public class TextMessagePanel : MonoBehaviour
             {
                 if (hasMessageFadeOut)
                 {
-                    StartMessageTimeout(messageFadeTime);
+                    StartMessageOnlyTextTimeout(messageFadeTime);
                 }
                 else
                 {
@@ -131,6 +131,11 @@ public class TextMessagePanel : MonoBehaviour
         StartCoroutine("MessageFadeTimeOut", messageTimeOutDissappear);
     }
 
+    public void StartMessageOnlyTextTimeout(float messageTimeOutDissappear)
+    {
+        StartCoroutine("MessageOnlyTextFadeTimeOut", messageTimeOutDissappear);
+    }
+
 
     public IEnumerator MessageFadeTimeOut(float messageTimeOutDissappear)
     {
@@ -142,4 +147,17 @@ public class TextMessagePanel : MonoBehaviour
         }
         narrativeTextMessagePanelAnim.Play("MessagePanel_FadeOut");
     }
+
+    public IEnumerator MessageOnlyTextFadeTimeOut(float messageTimeOutDissappear)
+    {
+        float normalizedTime = 0;
+        while (normalizedTime <= 1f) // In a while loop while counting down
+        {
+            normalizedTime += Time.deltaTime / messageTimeOutDissappear;
+            yield return null;
+        }
+        messageAnim.Play("MessagePanel_FadeOut");
+    }
+
+
 }
