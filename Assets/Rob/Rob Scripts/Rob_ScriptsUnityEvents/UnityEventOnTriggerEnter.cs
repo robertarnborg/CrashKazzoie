@@ -20,7 +20,7 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
     public bool hasPlayerMessageOnTrigger;
     [Tooltip("Text without Dialogue Panel")]
     public bool isTextOnly;
-    [TextArea]
+    [TextArea(0,40)]
     public string playerMessageOnTrigger;
     public bool fadeMessageOnTriggerExit = false;
     public bool hasMessageTimeout;
@@ -29,6 +29,9 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
     public TextAnchor textAnchor = TextAnchor.UpperLeft;
     #endregion
 
+    #region Image Panel Fields
+    public Sprite panelImage;
+    #endregion
 
     public bool isTriggered;
 
@@ -111,6 +114,7 @@ public class UnityEventOnTriggerEnter : MonoBehaviour
         }
         else
         {
+            TextMessagePanel.Instance.SetMessagePanelImageBackground(panelImage);
             TextMessagePanel.Instance.ShowSetMessageText(true, true, playerMessageOnTrigger);
             if (hasMessageTimeout)
             {
