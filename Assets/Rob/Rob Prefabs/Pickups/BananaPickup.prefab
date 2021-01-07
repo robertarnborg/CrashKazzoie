@@ -2924,6 +2924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5271772723500763677}
   - component: {fileID: 5212582208721421621}
+  - component: {fileID: 2565553262997049635}
   m_Layer: 0
   m_Name: BananaPickup
   m_TagString: Untagged
@@ -2960,3 +2961,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   maxRotation: 45
+--- !u!114 &2565553262997049635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090128028787738649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd5e01a2a5df3644852534c9a063ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
