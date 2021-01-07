@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TextMessagePanel : MonoBehaviour
 {
     #region MessagePanelWithBackGround
     public GameObject narrativeTextPanel;
-    public Text narrativeTextMessage;
+    public TMP_Text narrativeTextMessage;
     public Animator narrativeTextMessagePanelAnim;
 
     public Sprite narrativeTextPanelImageDefault;
@@ -51,13 +52,12 @@ public class TextMessagePanel : MonoBehaviour
     public void ShowSetMessageText(bool showMessagePanel, 
                                    bool setMessageText = true,
                                    string message = "",
-                                   TextAnchor textAnchor = TextAnchor.UpperLeft,
+                                   
                                    bool hasMessageFadeOut = false,
                                    float messageFadeTime = 2.0f)
     {
         if (showMessagePanel)
         {
-            narrativeTextMessage.alignment = textAnchor;
             narrativeTextPanel.SetActive(showMessagePanel);
             if (setMessageText)
             {

@@ -12,8 +12,8 @@ public class UnityEventTrigger : MonoBehaviour
     public int amountOfTimesToTrigger;
     public int currentAmountOfTimesTriggered;
     #region Text Message Fields
-    [TextArea]
     public bool hasPlayerMessageOnTrigger;
+    [TextArea]
     public string playerMessageOnTrigger;
     public float messageTimeout = 5f;
     public TextAnchor textAnchor = TextAnchor.UpperLeft;
@@ -28,7 +28,7 @@ public class UnityEventTrigger : MonoBehaviour
         {
             if (hasPlayerMessageOnTrigger)
             {
-                TextMessagePanel.Instance.ShowSetMessageText(true, true, playerMessageOnTrigger, textAnchor);
+                TextMessagePanel.Instance.ShowSetMessageText(true, true, playerMessageOnTrigger);
                 TextMessagePanel.Instance.StartMessageTimeout(messageTimeout);
             }
             eventToTrigger.Invoke();

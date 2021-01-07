@@ -23,7 +23,7 @@ public class PlayerCheckpointDetection : MonoBehaviour
     {
         if (SaveManager.Instance != null)
         {
-            if (SaveManager.Instance.currentCheckpointPosition != null)
+            if (SaveManager.Instance.isLevelStart == false)
             {
                 _transform.position = SaveManager.Instance.currentCheckpointPosition;
                 isLoading = true;
