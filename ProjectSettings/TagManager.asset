@@ -16,12 +16,12 @@ TagManager:
   - 
   - PostProcessing
   - 
+  - Player
   - 
+  - Ground
   - 
-  - 
-  - 
-  - 
-  - 
+  - Hazards
+  - Enemies
   - 
   - 
   - 

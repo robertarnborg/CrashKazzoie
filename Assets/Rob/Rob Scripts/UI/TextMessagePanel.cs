@@ -36,7 +36,6 @@ public class TextMessagePanel : MonoBehaviour
 
             // Set MessagePanelWithBackground References
             narrativeTextMessagePanelAnim = _instance.GetComponent<Animator>();
-            narrativeTextPanelImage = _instance.transform.GetChild(0).gameObject.GetComponent<Image>();
 
             // Set MessageWithoutBackground References
             textPanel = _instance.transform.GetChild(1).gameObject;

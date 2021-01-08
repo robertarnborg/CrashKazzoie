@@ -16,10 +16,13 @@ public class CannonShooter : MonoBehaviour
     private bool delay = true;
     private Vector3 spawnPosition;
 
+    private SimplerSFX fireCannonSFX;
+
     private void Awake()
     {
         spawnPosition = transform.position + (transform.forward * spawnOffset);
         //create direction
+        fireCannonSFX = GetComponent<SimplerSFX>();
     }
 
     private void FixedUpdate()
@@ -39,6 +42,8 @@ public class CannonShooter : MonoBehaviour
             timer -= shootingTimer;
             GameObject cannonBall = Instantiate(cannonBallPrefab, spawnPosition, Quaternion.identity) as GameObject;
             cannonBall.GetComponent<CannonBall>().SetCannonBall(ballLifetime, ballSpeed, transform.forward);
+
+            fireCannonSFX.PlayRandomSfx();
         }
     }
 

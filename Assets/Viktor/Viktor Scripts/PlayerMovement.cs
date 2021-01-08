@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool isDead;
+
     private Rigidbody myRigidBody = null;
+
 
     [SerializeField] private float movementSpeed = 9999f;
     [SerializeField] private float airSpeed = 100f;
@@ -19,6 +22,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform cam = null;
     [SerializeField] private DoubleJumpController doubleJumpController = null;
+    #region SFX
+    [Header("Movement Audio Sound FX")]
+    [SerializeField] private SimplerSFX jumpSFX;
+    [SerializeField] private SimplerSFX landSFX;
+    [SerializeField] private Animator walkSFXAnim;
+    #endregion
 
     private float rotateSmoothing = 1f;
     private float movSpeedStorage = 1f;
@@ -26,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private bool doubleJump = false;
     private bool hasHitDoubleJump = false;
     private Collider myCollider = null;
+
 
     private void Awake()
     {
@@ -35,6 +45,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (isDead)
+        {
+            walkSFXAnim.SetBool("isWalking", false);
+            return;
+        }
+
         MoveAndRotate();
         isGrounded = GroundChecker();
         Jump();
@@ -44,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
             hasHitDoubleJump = false;
             doubleJump = false;
             doubleJumpController.ResetDoubleJumpObjects();
+
+            landSFX.PlayRandomSfx();
         }
     }
 
@@ -55,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (direction.magnitude <= Mathf.Epsilon)
         {
+            walkSFXAnim.SetBool("isWalking", false);
             return;
         }
 
@@ -87,10 +106,16 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             movSpeedStorage = movementSpeed;
+            if (Mathf.Abs(currentSpeed) > 0.1f)
+            {
+                walkSFXAnim.SetBool("isWalking", true);
+            }
         }
         else if (!isGrounded)
         {
             movSpeedStorage = airSpeed;
+
+            walkSFXAnim.SetBool("isWalking", false);
         }
 
         myRigidBody.AddForce(direction * movSpeedStorage * Time.deltaTime);
@@ -120,11 +145,17 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpHeight, myRigidBody.velocity.z);
+
+            jumpSFX.audioSource.pitch = 1.0f;
+            jumpSFX.PlayRandomSfx();
         }
         else if (doubleJump)
         {
             myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpHeight, myRigidBody.velocity.z);
             doubleJump = false;
+
+            jumpSFX.audioSource.pitch = Random.Range(1.1f,1.2f);
+            jumpSFX.PlayRandomSfx();
         }
     }
 

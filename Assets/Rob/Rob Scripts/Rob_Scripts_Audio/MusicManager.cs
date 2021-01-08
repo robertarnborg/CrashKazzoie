@@ -14,19 +14,11 @@ public class MusicManager : MonoBehaviour
 
 
     #region Music
-    public AudioClip idle1OutsideHouse;
-    public AudioClip idle2FoyerHouse;
-    public AudioClip Ambience1Pedal;
-    public AudioClip Ambience1Piano;
-    public AudioClip Ambience2HornCall;
-    public AudioClip Ambience2aHornCall;
-    public AudioClip Ambience2bHornCallGlissando;
-    public AudioClip actionSuspenseMusic;
-    public AudioClip successfulDeliveryMusic;
-    public AudioClip successfulDeliveryMusicMaximum;
-    public AudioClip failedDeliveryMusic;
+    public AudioClip beachMusic;
+    public AudioClip winGameMusic;
     public AudioClip gameOverMusic;
-    public AudioClip jazzMusic;
+    public AudioClip timeOutMusic;
+
     #endregion
 
     #region ActionStingerCues
@@ -49,8 +41,8 @@ public class MusicManager : MonoBehaviour
 
     // Position of each music track
 
-    float _oldIdleMusicPos;
-    float _oldActionMusicPos;
+    float _oldIdleMusicPos = 0f;
+    //float _oldActionMusicPos = 0f;
 
     void Awake()
     {
@@ -122,67 +114,34 @@ public class MusicManager : MonoBehaviour
         audioTrack1.loop = activate;
         audioTrack2.loop = activate;
     }
+
     #endregion
     #region Specific Music Event Functions
 
 
-    public void PlayCalmHouseMusic()
+    public void PlayUpbeatBeachMusic()
     {
-        PlayCrossFadeMusic(idle1OutsideHouse, 1, 1, _oldIdleMusicPos);
+        PlayCrossFadeMusic(beachMusic, 1, 1, _oldIdleMusicPos);
     }
 
 
-    public void PlayHornCallMusic()
+    public void PlayWinGameMusic()
     {
-        PlayCrossFadeMusic(Ambience2aHornCall, 1, 1);
+        importantAudioCues.PlayOneShot(winGameMusic);
+        currentAudioTrack.Stop();
     }
 
 
-    public void PlayHornCallHorrorMusic()
-    {
-        PlayCrossFadeMusic(Ambience2bHornCallGlissando, 1, 1);
-    }
-
-
-
-    public void OnIdleBetweenDelivery()
-    {
-        if (currentAudioTrack.clip == actionSuspenseMusic)
-        {
-            _oldActionMusicPos = currentAudioTrack.time;
-        }
-        PlayCrossFadeMusic(idle1OutsideHouse, 1, 1, _oldIdleMusicPos);
-    }
-
-    public void OnPickup()
-    {
-        if (currentAudioTrack.clip == idle1OutsideHouse)
-        {
-            _oldIdleMusicPos = currentAudioTrack.time;
-        }
-        AudioClip actionStingerToPlay = CheckActionStingerTime(_oldActionMusicPos);
-        importantAudioCues.PlayOneShot(actionStingerToPlay);
-        PlayCrossFadeMusic(actionSuspenseMusic, 0.1f, 1, _oldActionMusicPos);
-    }
-
-    public void OnSuccessfulDelivery()
-    {
-        importantAudioCues.PlayOneShot(successfulDeliveryMusic);
-    }
-    public void OnSuccessfulDeliveryMaximum()
-    {
-        importantAudioCues.PlayOneShot(successfulDeliveryMusicMaximum);
-    }
-
-    public void OnFailedPickup()
-    {
-        importantAudioCues.PlayOneShot(failedDeliveryMusic);
-
-    }
-
-    public void GameOverMusic()
+    public void PlayGameOverMusic()
     {
         importantAudioCues.PlayOneShot(gameOverMusic);
+        currentAudioTrack.Stop();
+    }
+
+
+    public void PlayOnTimeOutMusic()
+    {
+        importantAudioCues.PlayOneShot(timeOutMusic);
         currentAudioTrack.Stop();
     }
 
