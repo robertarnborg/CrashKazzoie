@@ -11,8 +11,8 @@ public class SaveManager : MonoBehaviour
 
     #region Save Data
 
-
     public Vector3 currentCheckpointPosition;
+    public Vector3 currentCheckpointRotation;
 
     public Scene currentLevel;
     #endregion
@@ -38,17 +38,18 @@ public class SaveManager : MonoBehaviour
         // DEBUG
         if (Input.GetKeyDown(KeyCode.R))
         {
-            LoadCurrentCheckPoint();
+            RestartLevelLoadCurrentCheckPoint();
         }
     }
 
-    public void SaveCurrentCheckpoint(Vector3 checkpointPosition)
+    public void SaveCurrentCheckpoint(Vector3 checkpointPosition, Vector3 checkpointRotation)
     {
         currentCheckpointPosition = checkpointPosition;
+        currentCheckpointRotation = checkpointRotation;
     }
 
 
-    public void LoadCurrentCheckPoint()
+    public void RestartLevelLoadCurrentCheckPoint()
     {
         isLevelStart = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -32,7 +32,7 @@ public class CannonBall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //kill and reset player
+            other.gameObject.GetComponent<PlayerDeath>().GruesomeDeath();
             KillCannonBall();
         }
     }

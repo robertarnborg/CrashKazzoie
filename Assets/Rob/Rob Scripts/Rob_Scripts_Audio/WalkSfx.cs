@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-public enum FloorTypes{ GRASS, WOOD, CONCRETE, GRAVEL, DIRT}
+public enum FloorTypes{ GRASS, WATER, CONCRETE, GRAVEL, DIRT, SAND}
 public class WalkSfx : SimplerSFX
 {
-    public FloorTypes currentFloor = FloorTypes.WOOD;
+    public FloorTypes currentFloor = FloorTypes.WATER;
     public AudioClip[] sfxGrass;
-    public AudioClip[] sfxWood;
+    public AudioClip[] sfxWater;
     public AudioClip[] sfxConcrete;
     public AudioClip[] sfxGravel;
     public AudioClip[] sfxDirt;
+    public AudioClip[] sfxSand;
 
     public void PlayRandomWalkSounds()
     {
@@ -22,8 +23,8 @@ public class WalkSfx : SimplerSFX
             case FloorTypes.GRASS:
                 audioSource.PlayOneShot(sfxGrass[Random.Range(0, sfxGrass.Length)]);
                 break;
-            case FloorTypes.WOOD:
-                audioSource.PlayOneShot(sfxWood[Random.Range(0, sfxWood.Length)]);
+            case FloorTypes.WATER:
+                audioSource.PlayOneShot(sfxWater[Random.Range(0, sfxWater.Length)]);
                 break;
             case FloorTypes.CONCRETE:
                 audioSource.PlayOneShot(sfxConcrete[Random.Range(0, sfxConcrete.Length)]);
@@ -33,6 +34,9 @@ public class WalkSfx : SimplerSFX
                 break;
             case FloorTypes.DIRT:
                 audioSource.PlayOneShot(sfxDirt[Random.Range(0, sfxDirt.Length)]);
+                break;
+            case FloorTypes.SAND:
+                audioSource.PlayOneShot(sfxSand[Random.Range(0, sfxSand.Length)]);
                 break;
             default:
                 break;

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class SimplerSFX : MonoBehaviour
 {
     [Tooltip("Generic Sfx")]

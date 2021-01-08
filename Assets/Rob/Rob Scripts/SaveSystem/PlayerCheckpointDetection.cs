@@ -25,6 +25,7 @@ public class PlayerCheckpointDetection : MonoBehaviour
         {
             if (SaveManager.Instance.isLevelStart == false)
             {
+                _transform.rotation = Quaternion.Euler(SaveManager.Instance.currentCheckpointRotation);
                 _transform.position = SaveManager.Instance.currentCheckpointPosition;
                 isLoading = true;
                 StartCoroutine("IsLoadingTimeOut", 1.0f);
@@ -32,19 +33,19 @@ public class PlayerCheckpointDetection : MonoBehaviour
         }
     }
 
-    public void SaveCurrentCheckpoint(Vector3 checkpointPosition)
+    public void SaveCurrentCheckpoint(Vector3 checkpointPosition, Vector3 checkpointRotation)
     {
-        SaveManager.Instance.SaveCurrentCheckpoint(checkpointPosition);
+        SaveManager.Instance.SaveCurrentCheckpoint(checkpointPosition, checkpointRotation);
         if(!isLoading)
         {
-            CreateSaveFX();
+            CreateSaveFX(checkpointPosition);
         }
     }
 
 
-    public void CreateSaveFX()
+    public void CreateSaveFX(Vector3 checkpointPosition)
     {
-        Instantiate(saveGameFX, _transform.position, _transform.rotation);
+        Instantiate(saveGameFX, checkpointPosition, Quaternion.Euler(Vector3.up));
     }
 
 

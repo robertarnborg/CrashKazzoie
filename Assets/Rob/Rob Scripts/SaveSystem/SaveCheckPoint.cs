@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class SaveCheckPoint : MonoBehaviour
 {
+    [SerializeField]private Vector3 checkpointRotation;
     private Vector3 _checkpointPosition;
+    private bool isTriggered;
 
     private void Awake()
     {
@@ -15,8 +17,11 @@ public class SaveCheckPoint : MonoBehaviour
         if(other.gameObject.GetComponent<PlayerCheckpointDetection>() != null)
         {
             var playerCheckPointDetection = other.gameObject.GetComponent<PlayerCheckpointDetection>();
-            playerCheckPointDetection.SaveCurrentCheckpoint(_checkpointPosition);
-            Debug.Log("This Save Point is Saved!");
+            if (!isTriggered)
+            {
+                playerCheckPointDetection.SaveCurrentCheckpoint(_checkpointPosition, checkpointRotation);
+                isTriggered = true;
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ AudioSource:
   m_GameObject: {fileID: 1986373726447076490}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -929904756005674668, guid: 9fdf0780411f8b647b9974028f72dfe2, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -167,7 +167,7 @@ AudioSource:
   m_GameObject: {fileID: 8983057447763803051}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3555280637174241827, guid: 9fdf0780411f8b647b9974028f72dfe2, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -305,19 +305,9 @@ MonoBehaviour:
   fadeInOnStart: 1
   fadeInTime: 5
   fadeInVolume: 1
-  idle1OutsideHouse: {fileID: 0}
-  idle2FoyerHouse: {fileID: 0}
-  Ambience1Pedal: {fileID: 0}
-  Ambience1Piano: {fileID: 0}
-  Ambience2HornCall: {fileID: 0}
-  Ambience2aHornCall: {fileID: 0}
-  Ambience2bHornCallGlissando: {fileID: 0}
-  actionSuspenseMusic: {fileID: 0}
-  successfulDeliveryMusic: {fileID: 0}
-  successfulDeliveryMusicMaximum: {fileID: 0}
-  failedDeliveryMusic: {fileID: 0}
+  beachMusic: {fileID: 0}
+  winGameMusic: {fileID: 0}
   gameOverMusic: {fileID: 0}
-  jazzMusic: {fileID: 0}
   actionStingerAmajor: {fileID: 0}
   actionStingerEmajor: {fileID: 0}
   actionStingerFmajor: {fileID: 0}
@@ -325,7 +315,7 @@ MonoBehaviour:
   clipToFadeTo: {fileID: 0}
   audioTrack1: {fileID: 8983057447763803045}
   audioTrack2: {fileID: 8983057449406110770}
-  importantAudioCues: {fileID: 0}
+  importantAudioCues: {fileID: 1819776744548027064}
   currentAudioTrack: {fileID: 0}
   mainAudioMixer: {fileID: 24100000, guid: 9fdf0780411f8b647b9974028f72dfe2, type: 2}
 --- !u!1 &8983057449406110768
@@ -368,7 +358,7 @@ AudioSource:
   m_GameObject: {fileID: 8983057449406110768}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8864923031854229725, guid: 9fdf0780411f8b647b9974028f72dfe2, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
