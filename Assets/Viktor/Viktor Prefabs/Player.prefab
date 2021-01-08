@@ -189,6 +189,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2278337796689942713}
+  - component: {fileID: 8522645874418560525}
+  - component: {fileID: 5433818077871105342}
   m_Layer: 0
   m_Name: GruesomeDeath
   m_TagString: Untagged
@@ -210,6 +212,120 @@ Transform:
   m_Father: {fileID: 4153304867569583603}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8522645874418560525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898623195527619313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f9e4deab558904098446b99ab1343d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfx:
+  - {fileID: 8300000, guid: 88c483b52247de04d875210ec6673700, type: 3}
+  - {fileID: 8300000, guid: 6d4f76417fefdc84183397025d5e3546, type: 3}
+  - {fileID: 8300000, guid: 88aa7bc967320644286e10ff7da6ff4e, type: 3}
+  audioSource: {fileID: 5433818077871105342}
+  playOnEnable: 0
+--- !u!82 &5433818077871105342
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898623195527619313}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4c4c92154f735d94abe45ee45f171709, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.8
+  m_Pitch: 0
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5503651296694295152
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a3e9ff7c5ae8644b843c46edb31c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   movementSpeed: 1000
   airSpeed: 500
   maxSpeed: 10
@@ -480,9 +597,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a7e4ca2fa412f46a563d96d2e6e537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5503651296694295152}
+  playerMeshRenderer: {fileID: 0}
+  playerMovement: {fileID: 0}
+  playerCollider: {fileID: 0}
   waterDeathFX: {fileID: 6022105890685978548, guid: b8b3fb6edec32db42affd47b2ddcd0d8, type: 3}
   bloodSplatterFX: {fileID: 5317859933481212370, guid: 91c217aac880cbc4c87ac79dc772d98c, type: 3}
+  gruesomeDeathSFX: {fileID: 8522645874418560525}
   timeToReloadLevel: 4
 --- !u!1 &5744076294002565562
 GameObject:

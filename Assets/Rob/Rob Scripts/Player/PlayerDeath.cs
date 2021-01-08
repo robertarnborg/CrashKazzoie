@@ -9,6 +9,7 @@ public class PlayerDeath : MonoBehaviour
 
     [SerializeField] private GameObject waterDeathFX;
     [SerializeField] private GameObject bloodSplatterFX;
+    [SerializeField] private SimplerSFX gruesomeDeathSFX;
 
     [SerializeField] private float timeToReloadLevel = 4.0f;
 
@@ -33,7 +34,7 @@ public class PlayerDeath : MonoBehaviour
         cinemachineFreeLookCam.Follow = null;
         cinemachineFreeLookCam.LookAt = null;
 
-
+        gruesomeDeathSFX.PlayRandomSfx();
         Instantiate(bloodSplatterFX, transform.position, transform.rotation);
         StartCoroutine("RestartLevel", timeToReloadLevel);
     }
