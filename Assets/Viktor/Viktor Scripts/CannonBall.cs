@@ -9,6 +9,7 @@ public class CannonBall : MonoBehaviour
     private float lifeTime = 5f;
     private float speed = 5f;
     private Vector3 direction;
+    private GameObject shooter = null;
     private float timer = 0f;
 
     private void Update()
@@ -21,20 +22,26 @@ public class CannonBall : MonoBehaviour
         }
     }
 
-    public void SetCannonBall(float lifeTime, float speed, Vector3 direction)
+    public void SetCannonBall(float lifeTime, float speed, Vector3 direction, GameObject shooter)
     {
         this.lifeTime = lifeTime;
         this.speed = speed;
         this.direction = direction;
+        this.shooter = shooter;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Cannonball collided with" + other);
+        if (other.gameObject == shooter)
+        {
+            return;
+        }
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerDeath>().GruesomeDeath();
-            KillCannonBall();
         }
+        KillCannonBall();
     }
 
     private void KillCannonBall()
