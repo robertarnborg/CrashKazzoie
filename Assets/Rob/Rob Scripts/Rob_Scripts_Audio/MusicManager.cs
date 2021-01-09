@@ -135,14 +135,14 @@ public class MusicManager : MonoBehaviour
     public void PlayGameOverMusic()
     {
         importantAudioCues.PlayOneShot(gameOverMusic);
-        currentAudioTrack.Stop();
+        
     }
 
 
     public void PlayOnTimeOutMusic()
     {
         importantAudioCues.PlayOneShot(timeOutMusic);
-        currentAudioTrack.Stop();
+
     }
 
     #endregion

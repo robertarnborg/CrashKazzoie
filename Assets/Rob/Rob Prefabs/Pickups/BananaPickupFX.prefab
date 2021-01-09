@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5011974935485015743}
   - component: {fileID: 50857235005136795}
   m_Layer: 0
-  m_Name: BananaGameFX
+  m_Name: BananaPickupFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4890,7 +4890,7 @@ AudioSource:
   m_GameObject: {fileID: 1626502091412778748}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -929904756005674668, guid: 9fdf0780411f8b647b9974028f72dfe2, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
