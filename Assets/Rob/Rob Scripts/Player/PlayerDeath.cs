@@ -18,7 +18,7 @@ public class PlayerDeath : MonoBehaviour
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        playerMeshRenderer = GetComponent<MeshRenderer>();
+        playerMeshRenderer = GetComponentInChildren<MeshRenderer>();
         playerCollider = GetComponent<CapsuleCollider>();
 
         cinemachineFreeLookCam = FindObjectOfType<Cinemachine.CinemachineFreeLook>();

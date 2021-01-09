@@ -35,12 +35,14 @@ public class PlayerMovement : MonoBehaviour
     private bool doubleJump = false;
     private bool hasHitDoubleJump = false;
     private Collider myCollider = null;
+    private Animator myAnimator = null;
 
 
     private void Awake()
     {
         myRigidBody = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
+        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -54,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         MoveAndRotate();
         isGrounded = GroundChecker();
         Jump();
-        Debug.Log(isGrounded);
         if (hasHitDoubleJump && isGrounded)
         {
             hasHitDoubleJump = false;
@@ -74,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude <= Mathf.Epsilon)
         {
             walkSFXAnim.SetBool("isWalking", false);
+            myAnimator.SetBool("Running", false);
             return;
         }
 
@@ -90,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
 
         if(currentSpeed > maxSpeed)
         {
-            Debug.Log("max speed");
             Vector3 clampedSpeed = myRigidBody.velocity.normalized * maxSpeed;
             myRigidBody.velocity = new Vector3(clampedSpeed.x, myRigidBody.velocity.y, clampedSpeed.z);
             return;
@@ -109,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
             if (Mathf.Abs(currentSpeed) > 0.1f)
             {
                 walkSFXAnim.SetBool("isWalking", true);
+                myAnimator.SetBool("Running", true);
             }
         }
         else if (!isGrounded)
@@ -116,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
             movSpeedStorage = airSpeed;
 
             walkSFXAnim.SetBool("isWalking", false);
+            myAnimator.SetBool("Running", false);
         }
 
         myRigidBody.AddForce(direction * movSpeedStorage * Time.deltaTime);
@@ -140,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!Input.GetButtonDown("Jump"))
         {
+            myAnimator.SetBool("Jumping", false);
             return;
         }
         if (isGrounded)
@@ -148,19 +152,22 @@ public class PlayerMovement : MonoBehaviour
 
             jumpSFX.audioSource.pitch = 1.0f;
             jumpSFX.PlayRandomSfx();
+            myAnimator.SetBool("Jumping", true);
         }
         else if (doubleJump)
         {
             myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpHeight, myRigidBody.velocity.z);
             doubleJump = false;
 
-            jumpSFX.audioSource.pitch = Random.Range(1.1f,1.2f);
+            jumpSFX.audioSource.pitch = Random.Range(1.1f, 1.2f);
             jumpSFX.PlayRandomSfx();
+            myAnimator.SetBool("Jumping", true);
         }
     }
 
     private bool GroundChecker()
     {
+        myAnimator.SetBool("Landing", false);
         Vector3 checkBoxOrigin = new Vector3(transform.position.x, transform.position.y - jumpCheckOffset, transform.position.z);
         Collider[] colliders = Physics.OverlapBox(checkBoxOrigin, transform.localScale / 2.1f, Quaternion.Euler(Vector3.down));
         if (colliders.Length <= 0)
@@ -173,6 +180,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (colliders[i].CompareTag(tagsToJumpOn[s]))
                 {
+                    if (!isGrounded)
+                    {
+                        myAnimator.SetBool("Landing", true);
+                    }
                     return true;
                 }
             }
