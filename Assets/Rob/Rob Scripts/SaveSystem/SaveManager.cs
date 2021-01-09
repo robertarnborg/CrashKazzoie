@@ -52,6 +52,7 @@ public class SaveManager : MonoBehaviour
     public void RestartLevelLoadCurrentCheckPoint()
     {
         isLevelStart = false;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

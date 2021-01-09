@@ -37,6 +37,8 @@ public class PlayerDeath : MonoBehaviour
         gruesomeDeathSFX.PlayRandomSfx();
         Instantiate(bloodSplatterFX, transform.position, transform.rotation);
         StartCoroutine("RestartLevel", timeToReloadLevel);
+
+        MusicManager.Instance.PlayGameOverMusic();
     }
 
     public void WaterDeath()
@@ -44,6 +46,8 @@ public class PlayerDeath : MonoBehaviour
         playerMovement.isDead = true;
         Instantiate(waterDeathFX, transform.position, Quaternion.Euler(Vector3.up));
         StartCoroutine("RestartLevel", timeToReloadLevel);
+
+        MusicManager.Instance.PlayGameOverMusic();
     }
 
     public void TimeOutDeath()

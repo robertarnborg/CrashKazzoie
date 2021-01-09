@@ -15,7 +15,21 @@ public class MusicAreaManagerAndDetector : MonoBehaviour
         if(other.GetComponent<MusicArea>() != null)
         {
             currentMusicArea = other.GetComponent<MusicArea>();
-            musicManager.PlayCrossFadeMusic(currentMusicArea.musicToPlay, currentMusicArea.musicFadeInDuration, currentMusicArea.musicFadeInVolume, currentMusicArea.currentmusicTime);
+            if (!currentMusicArea.isFaderOnly)
+            {
+                musicManager.PlayCrossFadeMusic(currentMusicArea.musicToPlay, currentMusicArea.musicFadeInDuration, currentMusicArea.musicFadeInVolume, currentMusicArea.currentmusicTime);
+            }
+
+            if(currentMusicArea.isFadeOutCurrentMusicArea)
+            {
+                musicManager.FadeOutCurrentAudioTrack(currentMusicArea.musicFadeInDuration, 0f);
+            }
+
+            if (currentMusicArea.isFadeOutAllMusicAreas)
+            {
+                musicManager.FadeOutCurrentAudioTrack(currentMusicArea.musicFadeInDuration, 0f);
+            }
+        
         }
     }
 

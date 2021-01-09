@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 6919754761018667276}
   - component: {fileID: 5503651296694295113}
   - component: {fileID: 1626541166}
+  - component: {fileID: 313287945421964278}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -604,6 +605,20 @@ MonoBehaviour:
   bloodSplatterFX: {fileID: 5317859933481212370, guid: 91c217aac880cbc4c87ac79dc772d98c, type: 3}
   gruesomeDeathSFX: {fileID: 8522645874418560525}
   timeToReloadLevel: 4
+--- !u!114 &313287945421964278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5503651296694295152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167400c6224ae5f4dad9db1d0a57c017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMusicArea: {fileID: 0}
+  musicManager: {fileID: 0}
 --- !u!1 &5744076294002565562
 GameObject:
   m_ObjectHideFlags: 0
