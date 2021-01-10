@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class SaveCheckPoint : MonoBehaviour
 {
+    [SerializeField]private Transform checkpointPosition;
     [SerializeField]private Vector3 checkpointRotation;
     private Vector3 _checkpointPosition;
     private bool isTriggered;
 
+    private StandardUnityEvent saveLoadMessage;
+
     private void Awake()
     {
-        _checkpointPosition = transform.position;
+        _checkpointPosition = checkpointPosition.position;
+        saveLoadMessage = GetComponent<StandardUnityEvent>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,8 +23,12 @@ public class SaveCheckPoint : MonoBehaviour
             var playerCheckPointDetection = other.gameObject.GetComponent<PlayerCheckpointDetection>();
             if (!isTriggered)
             {
-                playerCheckPointDetection.SaveCurrentCheckpoint(_checkpointPosition, checkpointRotation);
-                isTriggered = true;
+                if(SaveManager.Instance.currentCheckpointPosition != _checkpointPosition)
+                {
+                    playerCheckPointDetection.SaveCurrentCheckpoint(_checkpointPosition, checkpointRotation);
+                    isTriggered = true;
+                    saveLoadMessage.ActivateTrigger();
+                }
             }
         }
     }

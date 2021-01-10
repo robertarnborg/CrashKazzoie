@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer playerMeshRenderer;
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private CapsuleCollider playerCollider;
 
     [SerializeField] private GameObject waterDeathFX;
     [SerializeField] private GameObject bloodSplatterFX;
     [SerializeField] private SimplerSFX gruesomeDeathSFX;
+    
+    private GameObject playerGFX;
+    private PlayerMovement playerMovement;
+    private CapsuleCollider playerCollider;
+    private Rigidbody playerBody;
 
     [SerializeField] private float timeToReloadLevel = 4.0f;
 
@@ -18,8 +20,9 @@ public class PlayerDeath : MonoBehaviour
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        playerMeshRenderer = GetComponentInChildren<MeshRenderer>();
+        playerGFX = transform.Find("Graphics").gameObject;
         playerCollider = GetComponent<CapsuleCollider>();
+        playerBody = GetComponent<Rigidbody>();
 
         cinemachineFreeLookCam = FindObjectOfType<Cinemachine.CinemachineFreeLook>();
     }
@@ -27,8 +30,9 @@ public class PlayerDeath : MonoBehaviour
 
     public void GruesomeDeath()
     {
+        playerBody.isKinematic = true;
         playerMovement.isDead = true;
-        playerMeshRenderer.enabled = false;
+        playerGFX.SetActive(false);
         playerCollider.enabled = false;
 
         cinemachineFreeLookCam.Follow = null;
@@ -44,7 +48,7 @@ public class PlayerDeath : MonoBehaviour
     public void WaterDeath()
     {
         playerMovement.isDead = true;
-        Instantiate(waterDeathFX, transform.position, Quaternion.Euler(Vector3.up));
+        Instantiate(waterDeathFX, transform.position, Quaternion.Euler(-75,0,0));
         StartCoroutine("RestartLevel", timeToReloadLevel);
 
         MusicManager.Instance.PlayGameOverMusic();

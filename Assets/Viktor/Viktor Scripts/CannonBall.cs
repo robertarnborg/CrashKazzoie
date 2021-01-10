@@ -32,7 +32,7 @@ public class CannonBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Cannonball collided with" + other);
+        //Debug.Log("Cannonball collided with" + other);
         if (other.gameObject == shooter)
         {
             return;
@@ -52,7 +52,7 @@ public class CannonBall : MonoBehaviour
         }
         else
         {
-            Debug.Log("Cannonball doesnt have an explosionPrefab");
+            //Debug.Log("Cannonball doesnt have an explosionPrefab");
         }
         Destroy(gameObject);
     }

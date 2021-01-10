@@ -14,7 +14,10 @@ GameObject:
   - component: {fileID: 944175745537590453}
   - component: {fileID: 5765368962224010239}
   - component: {fileID: 1957786369200945544}
-  m_Layer: 0
+  - component: {fileID: 1018732825369761341}
+  - component: {fileID: 7575892410910118902}
+  - component: {fileID: 898088105713558920}
+  m_Layer: 14
   m_Name: CannonBallExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4867,7 +4870,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4876,7 +4879,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0.2
-  MaxDistance: 20
+  MaxDistance: 60
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -4915,33 +4918,33 @@ AudioSource:
     - serializedVersion: 3
       time: 0.032
       value: 0.125
-      inSlope: -3.9078176
-      outSlope: -3.9078176
+      inSlope: -0.8246871
+      outSlope: -0.8246871
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.87942266
     - serializedVersion: 3
-      time: 0.059632175
-      value: 0.0625
-      inSlope: -0.9769544
-      outSlope: -0.9769544
+      time: 0.15134132
+      value: 0.059295654
+      inSlope: -0.16213489
+      outSlope: -0.16213489
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.5734048
       outWeight: 0
     - serializedVersion: 3
-      time: 0.11052869
-      value: 0.034484863
-      inSlope: -0.2442386
-      outSlope: -0.2442386
+      time: 0.25027633
+      value: 0.040893555
+      inSlope: -0.10062547
+      outSlope: -0.10062547
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.7420019
+      outWeight: 0.99645
     - serializedVersion: 3
-      time: 0.22750422
-      value: 0.013336182
+      time: 0.36723658
+      value: 0.01977539
       inSlope: -0.06105965
       outSlope: -0.06105965
       tangentMode: 0
@@ -4949,7 +4952,7 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.47292227
+      time: 0.7567815
       value: 0
       inSlope: -0.0152649125
       outSlope: -0.0152649125
@@ -4958,7 +4961,7 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.6288147
+      time: 0.75982666
       value: 0
       inSlope: 0.028330393
       outSlope: 0.028330393
@@ -5014,3 +5017,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &1018732825369761341
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944175745537590452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7575892410910118902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944175745537590452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4f93a31108ba64a9ecdad85cbbaa89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTimer: 1
+--- !u!114 &898088105713558920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944175745537590452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6f72515af154a4a853cc0fa9e6b86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -204,6 +204,36 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+--- !u!1 &2406550221839120400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7598506045552251665}
+  m_Layer: 0
+  m_Name: CheckPointPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7598506045552251665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406550221839120400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5300007, y: 0, z: 0.000000059604645}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6431552998326289222}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6431552998326289221
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +245,7 @@ GameObject:
   - component: {fileID: 6431552998326289222}
   - component: {fileID: 6431552998326289240}
   - component: {fileID: 6431552998326289223}
+  - component: {fileID: 339368599511717667}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -235,6 +266,7 @@ Transform:
   m_Children:
   - {fileID: 4398193630621073502}
   - {fileID: 5712225748063520423}
+  - {fileID: 7598506045552251665}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -263,7 +295,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692aecb284a175346be994475b800b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpointPosition: {fileID: 7598506045552251665}
   checkpointRotation: {x: 0, y: 0, z: 0}
+--- !u!114 &339368599511717667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431552998326289221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48a51308c1ec5241bb357338949c10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  isOneShot: 1
+  isAmountOfTimesTriggered: 0
+  amountOfTimesToTrigger: 0
+  currentAmountOfTimesTriggered: 0
+  hasDelayUntilEvent: 0
+  eventDelay: 5
+  hasPlayerMessageOnTrigger: 1
+  isTextOnly: 1
+  playerMessageOnTrigger: Checkpoint Saved!
+  fadeMessageOnTriggerExit: 0
+  hasMessageTimeout: 1
+  messageTimeout: 0.5
+  textAnchor: 1
+  panelImage: {fileID: 0}
+  isTriggered: 0
 --- !u!1 &7931457691082899613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1507,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

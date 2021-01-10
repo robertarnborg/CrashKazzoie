@@ -61,8 +61,6 @@ public class PlayerMovement : MonoBehaviour
             hasHitDoubleJump = false;
             doubleJump = false;
             doubleJumpController.ResetDoubleJumpObjects();
-
-            landSFX.PlayRandomSfx();
         }
     }
 
@@ -183,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
                     if (!isGrounded)
                     {
                         myAnimator.SetBool("Landing", true);
+                        landSFX.PlayRandomSfx();
                     }
                     return true;
                 }

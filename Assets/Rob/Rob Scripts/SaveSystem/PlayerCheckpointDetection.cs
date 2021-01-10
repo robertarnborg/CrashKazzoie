@@ -45,7 +45,7 @@ public class PlayerCheckpointDetection : MonoBehaviour
 
     public void CreateSaveFX(Vector3 checkpointPosition)
     {
-        Instantiate(saveGameFX, checkpointPosition, Quaternion.Euler(Vector3.up));
+        Instantiate(saveGameFX, checkpointPosition, Quaternion.Euler(-75,0,0));
     }
 
 

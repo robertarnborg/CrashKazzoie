@@ -46,6 +46,22 @@ public class MusicManager : MonoBehaviour
 
     void Awake()
     {
+        MakeStaticInstance();
+
+        currentAudioTrack = audioTrack1;
+        if (playOnStart)
+        {
+            audioTrack1.clip = clipToPlayOnStart;
+            audioTrack1.Play();
+        }
+        if (fadeInOnStart)
+        {
+            PlayCrossFadeMusic(clipToPlayOnStart, fadeInTime, fadeInVolume);
+        }
+    }
+
+    private void MakeStaticInstance()
+    {
         if (isPersistentDontDestroyOnLoad)
         {
             DontDestroyOnLoad(this);
@@ -59,18 +75,8 @@ public class MusicManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        currentAudioTrack = audioTrack1;
-        if (playOnStart)
-        {
-            audioTrack1.clip = clipToPlayOnStart;
-            audioTrack1.Play();
-        }
-        if (fadeInOnStart)
-        {
-            PlayCrossFadeMusic(clipToPlayOnStart, fadeInTime, fadeInVolume);
-        }
     }
+
     #region Main Functions
     public void PlayCrossFadeMusic(AudioClip clipToPlay, float duration = 1f, float targetVolume = 1f, float audioPosition = 0)
     {
@@ -127,14 +133,14 @@ public class MusicManager : MonoBehaviour
 
     public void PlayWinGameMusic()
     {
-        importantAudioCues.PlayOneShot(winGameMusic);
         currentAudioTrack.Stop();
+        importantAudioCues.PlayOneShot(winGameMusic);
     }
 
 
     public void PlayGameOverMusic()
     {
-        importantAudioCues.PlayOneShot(gameOverMusic);
+        importantAudioCues.PlayOneShot(gameOverMusic, 0.5f);
         
     }
 
